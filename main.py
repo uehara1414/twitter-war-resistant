@@ -110,10 +110,13 @@ def construct_text_Python_is_good(display_name, tweet_id):
 def main():
     targets = get_new_mention_with_VEP()
     for x in targets:
-        # retweet_with_Python_is_good(x.author.screen_name, x.id_str)
-        content = construct_text_Python_is_good(x.author.screen_name, x.id_str)
-        print("dry retweet", content)
-        record_as_tweeted(x)
+        if __debug__:
+            content = construct_text_Python_is_good(x.author.screen_name, x.id_str)
+            print("dry retweet", content)
+        else:
+            retweet_with_Python_is_good(x.author.screen_name, x.id_str)
+            record_as_tweeted(x)
+
 
 if __name__ == '__main__':
     main()
