@@ -4,6 +4,7 @@ import os
 
 DB_NAME = 'retweeted.db'
 
+
 def get_uehara_api() -> tweepy.API:
     """メンションを監視する自分のアカウントの Tweepy API Object を返します
 
@@ -35,11 +36,6 @@ def get_tsugumi_api() -> tweepy.API:
 def get_api(consumer_key: str, consumer_secret: str, access_token: str, access_secret: str):
     """API, ゲットだぜ！
 
-    :param consumer_key: str
-    :param consumer_secret: str
-    :param access_token: str
-    :param access_secret: str
-    :return: Tweepy API Object
     """
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_secret)
@@ -51,6 +47,7 @@ def create_table_if_not_exists() -> None:
     conn.execute('''CREATE TABLE IF NOT EXISTS tweeteds
                               (tweet_id text PRIMARY KEY, author_screen_name text,content text, date text)''')
     conn.commit()
+
 
 def is_already_retweeted_before(tweet_id: str) -> bool:
     create_table_if_not_exists()
@@ -106,6 +103,7 @@ def construct_text_Python_is_good(display_name, tweet_id):
     content = "https://twitter.com/{}/status/{}".format(display_name, tweet_id)
     content += "\n@{} Pythonはいいぞ!".format(display_name)
     return content
+
 
 def main():
     targets = get_new_mention_with_VEP()
