@@ -98,16 +98,21 @@ def get_new_mention_with_VEP() -> list:
 
 def retweet_with_Python_is_good(display_name, tweet_id):
     api = get_tsugumi_api()
-    content = "https://twitter.com/{}/status/{}".format(display_name, tweet_id)
-    content += "{}Pythonはいいぞ!".format(display_name)
+    content = construct_text_Python_is_good(display_name, tweet_id)
     api.update_status(content)
 
+
+def construct_text_Python_is_good(display_name, tweet_id):
+    content = "https://twitter.com/{}/status/{}".format(display_name, tweet_id)
+    content += "\n@{} Pythonはいいぞ!".format(x.author.screen_name)
+    return content
 
 def main():
     targets = get_new_mention_with_VEP()
     for x in targets:
-        # retweet_with_Python_is_good(x.display_name, x.id_str)
-        print(x.display_name, x.text)
+        # retweet_with_Python_is_good(x.author.screen_name, x.id_str)
+        content = construct_text_Python_is_good(x.author.screen_name, x.id_str)
+        print("dry retweet", content)
         record_as_tweeted(x)
 
 if __name__ == '__main__':
