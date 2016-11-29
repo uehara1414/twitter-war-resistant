@@ -88,7 +88,7 @@ def get_new_mention_with_VEP() -> list:
 
     targets = []
     for x in l:
-        if 'VEP' in x.text and not is_already_retweeted_before(x.id_str):
+        if 'VEP' in x.text.upper() and not is_already_retweeted_before(x.id_str):
             targets.append(x)
     return targets
 
