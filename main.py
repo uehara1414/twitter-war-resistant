@@ -72,13 +72,8 @@ def record_as_tweeted(tweet):
     create_table_if_not_exists()
     conn = sqlite3.connect(DB_NAME)
 
-    l = get_new_mention_with_VEP()
-
-    tweeted_list = []
-    for x in l:
-        tweeted_list.append((x.id_str, x.author.screen_name, x.text, x.created_at))
     c = conn.cursor()
-    c.executemany('INSERT INTO tweeteds VALUES(?, ?, ?, ?)', tweeted_list)
+    c.execute('INSERT INTO tweeteds VALUES(?, ?, ?, ?)', (tweet.id_str, tweet.author.screen_name, tweet.text, tweet.created_at))
     conn.commit()
 
 
