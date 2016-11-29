@@ -104,7 +104,7 @@ def retweet_with_Python_is_good(display_name, tweet_id):
 
 def construct_text_Python_is_good(display_name, tweet_id):
     content = "https://twitter.com/{}/status/{}".format(display_name, tweet_id)
-    content += "\n@{} Pythonはいいぞ!".format(x.author.screen_name)
+    content += "\n@{} Pythonはいいぞ!".format(display_name)
     return content
 
 def main():
